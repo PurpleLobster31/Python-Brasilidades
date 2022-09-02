@@ -1,3 +1,5 @@
+import requests
+
 class BuscaEndereco:
     def __init__(self, cep):
         if self.valida_cep(cep):
@@ -10,4 +12,8 @@ class BuscaEndereco:
     
     def valida_cep(self, cep):
         return len(cep) == 8
-        
+    
+    def acessa_cep(self):
+        url = "https://viacep.com.br/ws/{}/json/".format(self.cep)
+        r = requests.get(url)
+        return r
