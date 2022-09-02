@@ -1,7 +1,6 @@
-import re
-from telefonesBR import TelefonesBR
+from datetime import date, datetime, timedelta
+from datas_br import DatasBR
 
-numero = "5511997295131"
+cadastro = DatasBR()
 
-telefone = TelefonesBR(numero)
-print(telefone)
+print(cadastro.tempo_cadastro())
