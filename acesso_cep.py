@@ -8,7 +8,8 @@ class BuscaEndereco:
             raise ValueError("CEP inválido!")
     
     def __str__(self):
-        return f"{self.cep[:5]}-{self.cep[5:]}"
+        bairro, cidade, uf = self.acessa_cep()
+        return f"{self.cep[:5]}-{self.cep[5:]}\n{bairro}\n{cidade}\n{uf}"
     
     def valida_cep(self, cep):
         return len(cep) == 8
@@ -16,4 +17,6 @@ class BuscaEndereco:
     def acessa_cep(self):
         url = "https://viacep.com.br/ws/{}/json/".format(self.cep)
         r = requests.get(url)
-        return r
+        dados = r.json()
+        return dados.get('bairro'), dados.get('localidade'), dados.get('uf')
+        
